@@ -13,23 +13,22 @@ class AppStats < ApplicationRecord
     end
     def self.posts_word_count
         wordcounts = 0
-        @posts.each { |post| wordcounts += WordCounter.word_count(post) }
+        @posts.each { |post| wordcounts += 
+                            final = post.body.split(" ")
+                            wordcounts += final.length }
+        wordcounts
     end
     def self.quotes_word_count
         wordcounts = 0
-        @quotes.each { |quote| wordcounts += WordCounter.word_count(quote) }
-        return wordcounts
+        @quotes.each { |quote| wordcounts += 
+                            final = quote.body.split(" ")
+                            wordcounts += final.length }
+        wordcounts
     end
     def self.total_count
-        cnt = @posts.length + @quotes.length
-        return cnt
+        self.quotes_count() + self.posts_count()
     end
     def self.total_word_count
-        postcounts = 0
-        @posts.each { |post| postcounts += WordCounter.word_count(post) }
-        quotecounts = 0
-        @quotes.each { |quote| quotecounts += WordCounter.word_count(quote) }
-        nice = postcounts + quotecounts
-        return nice
+        self.posts_word_count() + self.quotes_word_count()
     end
 end
