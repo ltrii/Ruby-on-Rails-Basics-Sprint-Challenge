@@ -7,4 +7,5 @@ class WordCounter < ApplicationRecord
             count = 0
             return count
         end
+    end
 end
